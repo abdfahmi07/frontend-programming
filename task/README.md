@@ -13,11 +13,19 @@
 - Test task: `npm test`.
 - Jalankan task: `node task.js` atau `npm start`.
 
+**Install Task:**
+
+![Install Task](img/install.png)
+
 ## Test Task:
 
 - Task harus lolos semua test.
 - Test task: `npm test`.
 - Folder `test` dan isinya jangan dihapus.
+
+**Test Berhasil:**
+
+![Test Success](img/test-success.png)
 
 ## Ketentuan Pengumpulan:
 
