@@ -1,9 +1,17 @@
-const { users, all, store, update, destroy } = require("../task");
+const { users, all, store, update, destroy } = require("../task-2.solution");
 
 describe("# Menjalankan Test: Array of Object Users", () => {
+  const keys = ["name", "age", "major"];
+
   test("users harus berupa array of object", () => {
     expect(users).toEqual(
-      expect.arrayContaining([expect.objectContaining({})])
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: expect.any(String),
+          age: expect.any(Number),
+          major: expect.any(String),
+        }),
+      ])
     );
   });
 
@@ -23,18 +31,19 @@ describe("# Menjalankan Test: Array of Object Users", () => {
     users.forEach((user) => {
       const { name } = user;
       test(`${
-        name ?? "name"
+        name ?? "item"
       } harus memiliki property name, age, dan major`, () => {
-        expect(user).toHaveProperty("name");
-        expect(user).toHaveProperty("age");
-        expect(user).toHaveProperty("major");
+        keys.forEach((key) => {
+          expect(user).toHaveProperty(key);
+        });
       });
     });
 });
 
 describe("# Menjalankan Test: Function all", () => {
   test("function all harus bisa dipanggil", () => {
-    expect(all()).toBeUndefined();
+    const result = all();
+    expect(result).toBeUndefined();
   });
 });
 
@@ -46,42 +55,34 @@ describe("# Menjalankan Test: Function store", () => {
   };
 
   test("function create harus bisa dipanggil", () => {
-    expect(store(user)).toBeUndefined();
+    const result = store(user);
+    expect(result).toBeUndefined();
   });
 
   test("function create harus bisa menambahkan user baru", () => {
     const lengthOfOldUsers = users.length;
     store(user);
     const lengthOfNewUsers = users.length;
-
     expect(lengthOfNewUsers).toBeGreaterThan(lengthOfOldUsers);
   });
 });
 
 describe("# Menjalankan Test: Function edit", () => {
-  test("function edit harus bisa dipanggil", () => {
-    const index = 1;
-    const user = {
-      name: "Isfa",
-      age: 23,
-      major: "English",
-    };
+  const index = 1;
+  const oldUser = users[index];
+  const user = {
+    name: "Isfa Update",
+    age: 10,
+    major: "Software Engineer Update",
+  };
 
-    expect(update(index, user)).toBeUndefined();
+  test("function edit harus bisa dipanggil", () => {
+    const result = update(index, user);
+    expect(result).toBeUndefined();
   });
 
   test("function edit harus bisa mengedit user", () => {
-    const index = 1;
-    const user = {
-      name: "Muh Isfhani Ghiyath",
-      age: 20,
-      major: "Software Engineer",
-    };
-
-    const oldUser = users[index];
-    update(index, user);
     const newUser = users[index];
-
     expect(newUser).not.toEqual(oldUser);
   });
 });
@@ -90,14 +91,14 @@ describe("# Menjalankan Test: Function destroy", () => {
   const index = 2;
 
   test("function destroy harus bisa dipanggil", () => {
-    expect(destroy(index)).toBeUndefined();
+    const result = destroy(index);
+    expect(result).toBeUndefined();
   });
 
   test("function destroy harus bisa menghapus user", () => {
     const lengthOfOldUsers = users.length;
     destroy(index);
     const lengthOfNewUsers = users.length;
-
     expect(lengthOfNewUsers).toBeLessThan(lengthOfOldUsers);
   });
 });
