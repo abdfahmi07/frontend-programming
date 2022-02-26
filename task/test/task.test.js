@@ -1,4 +1,4 @@
-const { users, all, store, update, destroy } = require("../task-2.solution");
+const { users, all, store, update, destroy } = require("../task");
 
 describe("# Menjalankan Test: Array of Object Users", () => {
   const keys = ["name", "age", "major"];
@@ -69,7 +69,7 @@ describe("# Menjalankan Test: Function store", () => {
 
 describe("# Menjalankan Test: Function edit", () => {
   const index = 1;
-  const oldUser = users[index];
+  const oldUser = users && users[index];
   const user = {
     name: "Isfa Update",
     age: 10,
